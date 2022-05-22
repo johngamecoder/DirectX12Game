@@ -1,2 +1,7 @@
 /Game/Output/Engine.pdb
 /Game/.vs
+/Game/Client/x64
+/Game/Engine/x64
+/Game/Output/Client.ilk
+/Game/Output/Client.pdb
+/Game/Output
