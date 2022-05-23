@@ -80,7 +80,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)Engine\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Output\;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)Output</OutDir>
+    <OutDir>$(SolutionDir)Output\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -92,7 +92,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)Engine\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Output\;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)Output</OutDir>
+    <OutDir>$(SolutionDir)Output\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
