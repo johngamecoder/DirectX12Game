@@ -14,18 +14,20 @@ void Engine::Init(const WindowInfo& info)
 	_cmdQueue = make_shared<CommandQueue>();
 	_swapChain = make_shared<SwapChain>();
 	_rootSignature = make_shared<RootSignature>();
+	_cb = make_shared<ConstantBuffer>();
 
 	_device->Init();
-	_cmdQueue->Init(_device->GetDevice(),_swapChain);
-	_swapChain->Init(info, _device->GetDevice(), _device->GetDXGI(),_cmdQueue->GetCmdQueue());
+	_cmdQueue->Init(_device->GetDevice(), _swapChain);
+	_swapChain->Init(info, _device->GetDevice(), _device->GetDXGI(), _cmdQueue->GetCmdQueue());
 	_rootSignature->Init(_device->GetDevice());
+	_cb->Init(sizeof(Transform), 256);
 }
 
 void Engine::Render()
 {
 	RenderBegin();
 
-	//TODO : 나머지 물체들을 그려준다
+	// TODO : 나머지 물체들 그려준다
 
 	RenderEnd();
 }
@@ -46,6 +48,6 @@ void Engine::ResizeWindow(int32 width, int32 height)
 	_window.height = height;
 
 	RECT rect = { 0, 0, width, height };
-	::AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false); //윈도우 크기 조절
-	::SetWindowPos(_window.hwnd, 0, 100, 100, width, height, 0); //윈도우 포지션을 원하는 위치에 세팅해주겠다.+크기
+	::AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
+	::SetWindowPos(_window.hwnd, 0, 100, 100, width, height, 0);
 }
