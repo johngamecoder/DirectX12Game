@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Engine\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Output\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Library\Lib\;$(SolutionDir)Library\Include\;$(SolutionDir)Engine\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Library\Include\;$(SolutionDir)Library\Lib\;$(SolutionDir)Output\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)Output\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -90,8 +90,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)Engine\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Output\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Library\Lib\;$(SolutionDir)Library\Include\;$(SolutionDir)Engine\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Library\Include\;$(SolutionDir)Library\Lib\;$(SolutionDir)Output\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)Output\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -119,6 +119,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -157,6 +158,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

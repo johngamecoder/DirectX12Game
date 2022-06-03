@@ -1,0 +1,5 @@
+﻿  pch.cpp
+c:\directx12\game\engine\enginepch.h(18): error C2039: 'filesystem': 'std'의 멤버가 아닙니다.
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.16.27023\include\experimental\filesystem(30): note: 'std' 선언을 참조하십시오.
+c:\directx12\game\engine\enginepch.h(18): error C2878: 'filesystem': 같은 이름을 가진 네임스페이스 또는 클래스가 없습니다.
+c:\directx12\game\engine\enginepch.h(32): fatal error C1083: 포함 파일을 열 수 없습니다. 'DirectXTex/DirectXTex.h': No such file or directory
