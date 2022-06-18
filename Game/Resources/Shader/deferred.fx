@@ -2,7 +2,6 @@
 #define _DEFAULT_FX_
 
 #include "params.fx"
-#include "utils.fx"
 
 struct VS_IN
 {
@@ -37,8 +36,17 @@ VS_OUT VS_Main(VS_IN input)
     return output;
 }
 
-float4 PS_Main(VS_OUT input) : SV_Target
+struct PS_OUT
 {
+    float4 position : SV_Target0;
+    float4 normal : SV_Target1;
+    float4 color : SV_Target2;
+};
+
+PS_OUT PS_Main(VS_OUT input)
+{
+    PS_OUT output = (PS_OUT)0;
+
     float4 color = float4(1.f, 1.f, 1.f, 1.f);
     if (g_tex_on_0)
         color = g_tex_0.Sample(g_sam_0, input.uv);
@@ -54,21 +62,11 @@ float4 PS_Main(VS_OUT input) : SV_Target
         viewNormal = normalize(mul(tangentSpaceNormal, matTBN));
     }
 
-    LightColor totalColor = (LightColor)0.f;
+    output.position = float4(input.viewPos.xyz, 0.f);
+    output.normal = float4(viewNormal.xyz, 0.f);
+    output.color = color;
 
-    for (int i = 0; i < g_lightCount; ++i)
-    {
-         LightColor color = CalculateLightColor(i, viewNormal, input.viewPos);
-         totalColor.diffuse += color.diffuse;
-         totalColor.ambient += color.ambient;
-         totalColor.specular += color.specular;
-    }
-
-    color.xyz = (totalColor.diffuse.xyz * color.xyz)
-        + totalColor.ambient.xyz * color.xyz
-        + totalColor.specular.xyz;
-
-     return color;
+    return output;
 }
 
 #endif
