@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Library\Lib\;$(SolutionDir)Library\Include\;$(SolutionDir)Engine\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Library\Include\;$(SolutionDir)Library\Lib\;$(SolutionDir)Output\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Library/Include/FBX/;$(SolutionDir)Library/Include/;$(SolutionDir)Engine\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Library/Lib/;$(SolutionDir)Output\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)Output\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
