@@ -12,9 +12,10 @@ class SceneManager
 	DECLARE_SINGLE(SceneManager);
 
 public:
+	void Init();
 	void Update();
 	void Render();
-	void LoadScene(wstring sceneName);
+	//void LoadScene(wstring sceneName);
 
 	void SetLayerName(uint8 index, const wstring& name);
 	const wstring& IndexToLayerName(uint8 index) { return _layerNames[index]; }
@@ -23,10 +24,11 @@ public:
 	shared_ptr<class GameObject> Pick(int32 screenX, int32 screenY);
 
 public:
+	void SetActiveScene(shared_ptr<Scene> newScene);
 	shared_ptr<Scene> GetActiveScene() { return _activeScene; }
 
 private:
-	shared_ptr<Scene> LoadTestScene();
+	//shared_ptr<Scene> LoadTestScene();
 
 private:
 	shared_ptr<Scene> _activeScene;

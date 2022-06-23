@@ -205,3 +205,21 @@ void Scene::RemoveGameObject(shared_ptr<GameObject> gameObject)
 	if (findIt != _gameObjects.end())
 		_gameObjects.erase(findIt);
 }
+
+const std::shared_ptr<GameObject>& Scene::GetGameObjectByName(const wstring& objectName)
+{
+	if (objectName.empty())
+	{
+		return nullptr;
+	}
+
+	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
+	{
+		if (gameObject->GetName() == objectName)
+		{
+			return gameObject;
+		}
+	}
+
+	return nullptr;
+}

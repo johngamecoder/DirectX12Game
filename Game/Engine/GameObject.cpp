@@ -140,7 +140,7 @@ shared_ptr<Animator> GameObject::GetAnimator()
 	return static_pointer_cast<Animator>(component);
 }
 
-void GameObject::AddComponent(shared_ptr<Component> component)
+shared_ptr<Component> GameObject::AddComponent(shared_ptr<Component> component)
 {
 	component->SetGameObject(shared_from_this());
 
@@ -153,4 +153,12 @@ void GameObject::AddComponent(shared_ptr<Component> component)
 	{
 		_scripts.push_back(dynamic_pointer_cast<MonoBehaviour>(component));
 	}
+
+	return component;
+}
+
+void GameObject::SetName(const wstring& name)
+{
+	Object::SetName(name);
+	_objectName = name;
 }

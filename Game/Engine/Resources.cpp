@@ -7,6 +7,7 @@ void Resources::Init()
 {
 	CreateDefaultShader();
 	CreateDefaultMaterial();
+	CreatePlanetMaterial();
 }
 
 shared_ptr<Mesh> Resources::LoadPointMesh()
@@ -468,44 +469,44 @@ void Resources::CreateDefaultShader()
 		Add<Shader>(L"Final", shader);
 	}
 
-	// Compute Shader
-	{
-		shared_ptr<Shader> shader = make_shared<Shader>();
-		shader->CreateComputeShader(L"..\\Resources\\Shader\\compute.fx", "CS_Main", "cs_5_0");
-		Add<Shader>(L"ComputeShader", shader);
-	}
+	//// Compute Shader
+	//{
+	//	shared_ptr<Shader> shader = make_shared<Shader>();
+	//	shader->CreateComputeShader(L"..\\Resources\\Shader\\compute.fx", "CS_Main", "cs_5_0");
+	//	Add<Shader>(L"ComputeShader", shader);
+	//}
 
-	// Particle
-	{
-		ShaderInfo info =
-		{
-			SHADER_TYPE::PARTICLE,
-			RASTERIZER_TYPE::CULL_BACK,
-			DEPTH_STENCIL_TYPE::LESS_NO_WRITE,
-			BLEND_TYPE::ALPHA_BLEND,
-			D3D_PRIMITIVE_TOPOLOGY_POINTLIST
-		};
+	//// Particle
+	//{
+	//	ShaderInfo info =
+	//	{
+	//		SHADER_TYPE::PARTICLE,
+	//		RASTERIZER_TYPE::CULL_BACK,
+	//		DEPTH_STENCIL_TYPE::LESS_NO_WRITE,
+	//		BLEND_TYPE::ALPHA_BLEND,
+	//		D3D_PRIMITIVE_TOPOLOGY_POINTLIST
+	//	};
 
-		ShaderArg arg =
-		{
-			"VS_Main",
-			"",
-			"",
-			"GS_Main",
-			"PS_Main"
-		};
+	//	ShaderArg arg =
+	//	{
+	//		"VS_Main",
+	//		"",
+	//		"",
+	//		"GS_Main",
+	//		"PS_Main"
+	//	};
 
-		shared_ptr<Shader> shader = make_shared<Shader>();
-		shader->CreateGraphicsShader(L"..\\Resources\\Shader\\particle.fx", info, arg);
-		Add<Shader>(L"Particle", shader);
-	}
+	//	shared_ptr<Shader> shader = make_shared<Shader>();
+	//	shader->CreateGraphicsShader(L"..\\Resources\\Shader\\particle.fx", info, arg);
+	//	Add<Shader>(L"Particle", shader);
+	//}
 
-	// ComputeParticle
-	{
-		shared_ptr<Shader> shader = make_shared<Shader>();
-		shader->CreateComputeShader(L"..\\Resources\\Shader\\particle.fx", "CS_Main", "cs_5_0");
-		Add<Shader>(L"ComputeParticle", shader);
-	}
+	//// ComputeParticle
+	//{
+	//	shared_ptr<Shader> shader = make_shared<Shader>();
+	//	shader->CreateComputeShader(L"..\\Resources\\Shader\\particle.fx", "CS_Main", "cs_5_0");
+	//	Add<Shader>(L"ComputeParticle", shader);
+	//}
 
 	// Shadow
 	{
@@ -521,62 +522,62 @@ void Resources::CreateDefaultShader()
 		Add<Shader>(L"Shadow", shader);
 	}
 
-	// Tessellation
-	{
-		ShaderInfo info =
-		{
-			SHADER_TYPE::FORWARD,
-			RASTERIZER_TYPE::WIREFRAME,
-			DEPTH_STENCIL_TYPE::LESS,
-			BLEND_TYPE::DEFAULT,
-			D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST
-		};
+	//// Tessellation
+	//{
+	//	ShaderInfo info =
+	//	{
+	//		SHADER_TYPE::FORWARD,
+	//		RASTERIZER_TYPE::WIREFRAME,
+	//		DEPTH_STENCIL_TYPE::LESS,
+	//		BLEND_TYPE::DEFAULT,
+	//		D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST
+	//	};
 
-		ShaderArg arg =
-		{
-			"VS_Main",
-			"HS_Main",
-			"DS_Main",
-			"",
-			"PS_Main",
-		};
+	//	ShaderArg arg =
+	//	{
+	//		"VS_Main",
+	//		"HS_Main",
+	//		"DS_Main",
+	//		"",
+	//		"PS_Main",
+	//	};
 
-		shared_ptr<Shader> shader = make_shared<Shader>();
-		shader->CreateGraphicsShader(L"..\\Resources\\Shader\\tessellation.fx", info, arg);
-		Add<Shader>(L"Tessellation", shader);
-	}
+	//	shared_ptr<Shader> shader = make_shared<Shader>();
+	//	shader->CreateGraphicsShader(L"..\\Resources\\Shader\\tessellation.fx", info, arg);
+	//	Add<Shader>(L"Tessellation", shader);
+	//}
 
-	// Terrain
-	{
-		ShaderInfo info =
-		{
-			SHADER_TYPE::DEFERRED,
-			RASTERIZER_TYPE::CULL_BACK,
-			DEPTH_STENCIL_TYPE::LESS,
-			BLEND_TYPE::DEFAULT,
-			D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST
-		};
+	//// Terrain
+	//{
+	//	ShaderInfo info =
+	//	{
+	//		SHADER_TYPE::DEFERRED,
+	//		RASTERIZER_TYPE::CULL_BACK,
+	//		DEPTH_STENCIL_TYPE::LESS,
+	//		BLEND_TYPE::DEFAULT,
+	//		D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST
+	//	};
 
-		ShaderArg arg =
-		{
-			"VS_Main",
-			"HS_Main",
-			"DS_Main",
-			"",
-			"PS_Main",
-		};
+	//	ShaderArg arg =
+	//	{
+	//		"VS_Main",
+	//		"HS_Main",
+	//		"DS_Main",
+	//		"",
+	//		"PS_Main",
+	//	};
 
-		shared_ptr<Shader> shader = make_shared<Shader>();
-		shader->CreateGraphicsShader(L"..\\Resources\\Shader\\terrain.fx", info, arg);
-		Add<Shader>(L"Terrain", shader);
-	}
+	//	shared_ptr<Shader> shader = make_shared<Shader>();
+	//	shader->CreateGraphicsShader(L"..\\Resources\\Shader\\terrain.fx", info, arg);
+	//	Add<Shader>(L"Terrain", shader);
+	//}
 
-	// ComputeAnimation
-	{
-		shared_ptr<Shader> shader = make_shared<Shader>();
-		shader->CreateComputeShader(L"..\\Resources\\Shader\\animation.fx", "CS_Main", "cs_5_0");
-		Add<Shader>(L"ComputeAnimation", shader);
-	}
+	//// ComputeAnimation
+	//{
+	//	shared_ptr<Shader> shader = make_shared<Shader>();
+	//	shader->CreateComputeShader(L"..\\Resources\\Shader\\animation.fx", "CS_Main", "cs_5_0");
+	//	Add<Shader>(L"ComputeAnimation", shader);
+	//}
 }
 
 void Resources::CreateDefaultMaterial()
@@ -599,19 +600,19 @@ void Resources::CreateDefaultMaterial()
 		Add<Material>(L"DirLight", material);
 	}
 
-	// PointLight
-	{
-		const WindowInfo& window = GEngine->GetWindow();
-		Vec2 resolution = { static_cast<float>(window.width), static_cast<float>(window.height) };
+	//// PointLight
+	//{
+	//	const WindowInfo& window = GEngine->GetWindow();
+	//	Vec2 resolution = { static_cast<float>(window.width), static_cast<float>(window.height) };
 
-		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"PointLight");
-		shared_ptr<Material> material = make_shared<Material>();
-		material->SetShader(shader);
-		material->SetTexture(0, GET_SINGLE(Resources)->Get<Texture>(L"PositionTarget"));
-		material->SetTexture(1, GET_SINGLE(Resources)->Get<Texture>(L"NormalTarget"));
-		material->SetVec2(0, resolution);
-		Add<Material>(L"PointLight", material);
-	}
+	//	shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"PointLight");
+	//	shared_ptr<Material> material = make_shared<Material>();
+	//	material->SetShader(shader);
+	//	material->SetTexture(0, GET_SINGLE(Resources)->Get<Texture>(L"PositionTarget"));
+	//	material->SetTexture(1, GET_SINGLE(Resources)->Get<Texture>(L"NormalTarget"));
+	//	material->SetVec2(0, resolution);
+	//	Add<Material>(L"PointLight", material);
+	//}
 
 	// Final
 	{
@@ -624,42 +625,42 @@ void Resources::CreateDefaultMaterial()
 		Add<Material>(L"Final", material);
 	}
 
-	// Compute Shader
-	{
-		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"ComputeShader");
-		shared_ptr<Material> material = make_shared<Material>();
-		material->SetShader(shader);
-		Add<Material>(L"ComputeShader", material);
-	}
+	//// Compute Shader
+	//{
+	//	shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"ComputeShader");
+	//	shared_ptr<Material> material = make_shared<Material>();
+	//	material->SetShader(shader);
+	//	Add<Material>(L"ComputeShader", material);
+	//}
 
-	// Particle
-	{
-		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Particle");
-		shared_ptr<Material> material = make_shared<Material>();
-		material->SetShader(shader);
-		Add<Material>(L"Particle", material);
-	}
+	//// Particle
+	//{
+	//	shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Particle");
+	//	shared_ptr<Material> material = make_shared<Material>();
+	//	material->SetShader(shader);
+	//	Add<Material>(L"Particle", material);
+	//}
 
-	// ComputeParticle
-	{
-		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"ComputeParticle");
-		shared_ptr<Material> material = make_shared<Material>();
-		material->SetShader(shader);
+	//// ComputeParticle
+	//{
+	//	shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"ComputeParticle");
+	//	shared_ptr<Material> material = make_shared<Material>();
+	//	material->SetShader(shader);
 
-		Add<Material>(L"ComputeParticle", material);
-	}
+	//	Add<Material>(L"ComputeParticle", material);
+	//}
 
-	// GameObject
-	{
-		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Deferred");
-		shared_ptr<Texture> texture = GET_SINGLE(Resources)->Load<Texture>(L"Leather", L"..\\Resources\\Texture\\Leather.jpg");
-		shared_ptr<Texture> texture2 = GET_SINGLE(Resources)->Load<Texture>(L"Leather_Normal", L"..\\Resources\\Texture\\Leather_Normal.jpg");
-		shared_ptr<Material> material = make_shared<Material>();
-		material->SetShader(shader);
-		material->SetTexture(0, texture);
-		material->SetTexture(1, texture2);
-		Add<Material>(L"GameObject", material);
-	}
+	//// GameObject
+	//{
+	//	shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Deferred");
+	//	shared_ptr<Texture> texture = GET_SINGLE(Resources)->Load<Texture>(L"Leather", L"..\\Resources\\Texture\\Leather.jpg");
+	//	shared_ptr<Texture> texture2 = GET_SINGLE(Resources)->Load<Texture>(L"Leather_Normal", L"..\\Resources\\Texture\\Leather_Normal.jpg");
+	//	shared_ptr<Material> material = make_shared<Material>();
+	//	material->SetShader(shader);
+	//	material->SetTexture(0, texture);
+	//	material->SetTexture(1, texture2);
+	//	Add<Material>(L"GameObject", material);
+	//}
 
 	// Shadow
 	{
@@ -669,30 +670,103 @@ void Resources::CreateDefaultMaterial()
 		Add<Material>(L"Shadow", material);
 	}
 
-	// Tessellation
-	{
-		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Tessellation");
-		shared_ptr<Material> material = make_shared<Material>();
-		material->SetShader(shader);
-		Add<Material>(L"Tessellation", material);
-	}
+	//// Tessellation
+	//{
+	//	shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Tessellation");
+	//	shared_ptr<Material> material = make_shared<Material>();
+	//	material->SetShader(shader);
+	//	Add<Material>(L"Tessellation", material);
+	//}
 
-	// Terrain
+	//// Terrain
+	//{
+	//	shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Terrain");
+	//	shared_ptr<Texture> texture = GET_SINGLE(Resources)->Load<Texture>(L"Terrain", L"..\\Resources\\Texture\\Terrain\\terrain.png");
+	//	shared_ptr<Material> material = make_shared<Material>();
+	//	material->SetShader(shader);
+	//	material->SetTexture(0, texture);
+	//	Add<Material>(L"Terrain", material);
+	//}
+
+	//// ComputeAnimation
+	//{
+	//	shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"ComputeAnimation");
+	//	shared_ptr<Material> material = make_shared<Material>();
+	//	material->SetShader(shader);
+
+	//	Add<Material>(L"ComputeAnimation", material);
+	//}
+}
+
+void Resources::CreatePlanetMaterial()
+{
+	// Sun
 	{
-		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Terrain");
-		shared_ptr<Texture> texture = GET_SINGLE(Resources)->Load<Texture>(L"Terrain", L"..\\Resources\\Texture\\Terrain\\terrain.png");
+		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Deferred");
+		shared_ptr<Texture> texture = GET_SINGLE(Resources)->Load<Texture>(L"Sun", L"..\\Resources\\Texture\\Planet\\Sun.jpg");
 		shared_ptr<Material> material = make_shared<Material>();
 		material->SetShader(shader);
 		material->SetTexture(0, texture);
-		Add<Material>(L"Terrain", material);
+		Add<Material>(L"Sun", material);
 	}
 
-	// ComputeAnimation
+	// Mercury
 	{
-		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"ComputeAnimation");
+		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Deferred");
+		shared_ptr<Texture> texture = GET_SINGLE(Resources)->Load<Texture>(L"Mercury", L"..\\Resources\\Texture\\Planet\\Mercury.jpg");
 		shared_ptr<Material> material = make_shared<Material>();
 		material->SetShader(shader);
+		material->SetTexture(0, texture);
+		Add<Material>(L"Mercury", material);
+	}
 
-		Add<Material>(L"ComputeAnimation", material);
+	// Venus
+	{
+		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Deferred");
+		shared_ptr<Texture> texture = GET_SINGLE(Resources)->Load<Texture>(L"Venus", L"..\\Resources\\Texture\\Planet\\Venus.jpg");
+		shared_ptr<Material> material = make_shared<Material>();
+		material->SetShader(shader);
+		material->SetTexture(0, texture);
+		Add<Material>(L"Venus", material);
+	}
+
+	// Earth
+	{
+		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Deferred");
+		shared_ptr<Texture> texture = GET_SINGLE(Resources)->Load<Texture>(L"Earth", L"..\\Resources\\Texture\\Planet\\Earth.jpg");
+		shared_ptr<Material> material = make_shared<Material>();
+		material->SetShader(shader);
+		material->SetTexture(0, texture);
+		Add<Material>(L"Earth", material);
+	}
+
+	// Moon
+	{
+		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Deferred");
+		shared_ptr<Texture> texture = GET_SINGLE(Resources)->Load<Texture>(L"Moon", L"..\\Resources\\Texture\\Planet\\Moon.jpg");
+		shared_ptr<Material> material = make_shared<Material>();
+		material->SetShader(shader);
+		material->SetTexture(0, texture);
+		Add<Material>(L"Moon", material);
+	}
+
+	// Mars
+	{
+		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Deferred");
+		shared_ptr<Texture> texture = GET_SINGLE(Resources)->Load<Texture>(L"Mars", L"..\\Resources\\Texture\\Planet\\Mars.jpg");
+		shared_ptr<Material> material = make_shared<Material>();
+		material->SetShader(shader);
+		material->SetTexture(0, texture);
+		Add<Material>(L"Mars", material);
+	}
+
+	// Jupiter
+	{
+		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Deferred");
+		shared_ptr<Texture> texture = GET_SINGLE(Resources)->Load<Texture>(L"Jupiter", L"..\\Resources\\Texture\\Planet\\Jupiter.jpg");
+		shared_ptr<Material> material = make_shared<Material>();
+		material->SetShader(shader);
+		material->SetTexture(0, texture);
+		Add<Material>(L"Jupiter", material);
 	}
 }

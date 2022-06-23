@@ -16,7 +16,7 @@ class Engine
 public:
 	void Init(const WindowInfo& info);
 	void Update();
-
+	void Exit();
 public:
 	const WindowInfo& GetWindow() { return _window; }
 	shared_ptr<Device> GetDevice() { return _device; }

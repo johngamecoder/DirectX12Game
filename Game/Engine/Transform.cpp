@@ -27,7 +27,8 @@ void Transform::FinalUpdate()
 	shared_ptr<Transform> parent = GetParent().lock();
 	if (parent != nullptr)
 	{
-		_matWorld *= parent->GetLocalToWorldMatrix();
+		const Matrix& parentMat = parent->GetNoScaleLocalToWorldMatrix();
+		_matWorld *= parentMat;
 	}
 }
 
@@ -44,6 +45,13 @@ void Transform::PushData()
 	CONST_BUFFER(CONSTANT_BUFFER_TYPE::TRANSFORM)->PushGraphicsData(&transformParams, sizeof(transformParams));
 }
 
+const Matrix Transform::GetNoScaleLocalToWorldMatrix()
+{
+	Matrix matScale = Matrix::CreateScale(_localScale);
+	Matrix matScaleInv = matScale.Invert();
+
+	return matScaleInv * _matWorld;
+}
 
 void Transform::LookAt(const Vec3& dir)
 {

@@ -36,6 +36,7 @@ void Engine::Init(const WindowInfo& info)
 	GET_SINGLE(Input)->Init(info.hwnd);
 	GET_SINGLE(Timer)->Init();
 	GET_SINGLE(Resources)->Init();
+	GET_SINGLE(SceneManager)->Init();
 }
 
 void Engine::Update()
@@ -48,6 +49,11 @@ void Engine::Update()
 	Render();
 
 	ShowFps();
+}
+
+void Engine::Exit()
+{
+	::PostMessage(_window.hwnd, WM_DESTROY, 0, 0L);
 }
 
 void Engine::Render()

@@ -20,6 +20,7 @@ public:
 	float GetBoundingSphereRadius() { return max(max(_localScale.x, _localScale.y), _localScale.z); }
 
 	const Matrix& GetLocalToWorldMatrix() { return _matWorld; }
+	const Matrix GetNoScaleLocalToWorldMatrix();
 	Vec3 GetWorldPosition() { return _matWorld.Translation(); }
 
 	Vec3 GetRight() { return _matWorld.Right(); }
@@ -29,6 +30,8 @@ public:
 	void SetLocalPosition(const Vec3& position) { _localPosition = position; }
 	void SetLocalRotation(const Vec3& rotation) { _localRotation = rotation; }
 	void SetLocalScale(const Vec3& scale) { _localScale = scale; }
+	
+	void SetMatWorld(const Matrix& matWorld) { _matWorld = matWorld; }
 
 	void LookAt(const Vec3& dir);
 

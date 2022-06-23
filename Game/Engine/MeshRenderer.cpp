@@ -17,6 +17,33 @@ MeshRenderer::~MeshRenderer()
 
 }
 
+void MeshRenderer::SetMeshAndMaterial(MeshType type, const wstring& matName)
+{
+	if (matName.empty())
+	{
+		return;
+	}
+
+	switch (type)
+	{
+		case MeshType::SPHERE:
+		{
+			shared_ptr<Mesh> sphereMesh = GET_SINGLE(Resources)->LoadSphereMesh();
+			SetMesh(sphereMesh);
+			break;
+		}
+		case MeshType::BOX:
+		{
+			//TODO
+
+			break;
+		}
+	}
+
+	shared_ptr<Material> material = GET_SINGLE(Resources)->Get<Material>(matName);
+	SetMaterial(material);
+}
+
 void MeshRenderer::SetMaterial(shared_ptr<Material> material, uint32 idx)
 {
 	if (_materials.size() <= static_cast<size_t>(idx))

@@ -35,7 +35,7 @@ public:
 	shared_ptr<BaseCollider> GetCollider();
 	shared_ptr<Animator> GetAnimator();
 
-	void AddComponent(shared_ptr<Component> component);
+	shared_ptr<Component> AddComponent(shared_ptr<Component> component);
 
 	void SetCheckFrustum(bool checkFrustum) { _checkFrustum = checkFrustum; }
 	bool GetCheckFrustum() { return _checkFrustum; }
@@ -46,7 +46,10 @@ public:
 	void SetStatic(bool flag) { _static = flag; }
 	bool IsStatic() { return _static; }
 
+	void SetName(const wstring& name) override;
+	const wstring& GetName() { return _objectName; }
 private:
+	wstring _objectName;
 	array<shared_ptr<Component>, FIXED_COMPONENT_COUNT> _components;
 	vector<shared_ptr<MonoBehaviour>> _scripts;
 

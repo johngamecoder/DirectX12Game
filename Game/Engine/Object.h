@@ -27,7 +27,7 @@ public:
 
 	OBJECT_TYPE GetType() { return _objectType; }
 
-	void SetName(const wstring& name) { _name = name; }
+	virtual void SetName(const wstring& name) { _name = name; }
 	const wstring& GetName() { return _name; }
 
 	uint32 GetID() { return _id; }
