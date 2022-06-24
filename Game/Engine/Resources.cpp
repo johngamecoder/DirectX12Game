@@ -29,6 +29,44 @@ shared_ptr<Mesh> Resources::LoadPointMesh()
 	return mesh;
 }
 
+std::shared_ptr<Mesh> Resources::LoadCircleMesh()
+{
+	shared_ptr<Mesh> findMesh = Get<Mesh>(L"Circle");
+	if (findMesh)
+		return findMesh;
+
+	float radius = 1.f; // 구의 반지름
+	uint32 sliceCount = 50; // 세로 분할
+
+	vector<Vertex> vec;
+	Vertex v;
+
+	float sliceAngle = XM_2PI / sliceCount;
+
+	// 고리에 위치한 정점
+	for (uint32 x = 0; x <= sliceCount; ++x)
+	{
+		float theta = x * sliceAngle;
+
+		v.pos.x = radius * cosf(theta);
+		v.pos.z = radius * sinf(theta);
+		vec.push_back(v);
+	}
+
+	vector<uint32> idx(20);
+
+	for (uint32 x = 0; x < sliceCount + 1; ++x)
+	{
+		idx.push_back(x);
+	}
+
+	shared_ptr<Mesh> mesh = make_shared<Mesh>();
+	mesh->Create(vec, idx);
+	Add(L"Circle", mesh);
+
+	return mesh;
+}
+
 shared_ptr<Mesh> Resources::LoadRectangleMesh()
 {
 	shared_ptr<Mesh> findMesh = Get<Mesh>(L"Rectangle");
@@ -351,6 +389,18 @@ void Resources::CreateDefaultShader()
 		Add<Shader>(L"Skybox", shader);
 	}
 
+	// Default (Basic)
+	{
+		ShaderInfo info =
+		{
+			SHADER_TYPE::FORWARD,
+		};
+
+		shared_ptr<Shader> shader = make_shared<Shader>();
+		shader->CreateGraphicsShader(L"..\\Resources\\Shader\\default.fx", info);
+		Add<Shader>(L"Default", shader);
+	}
+
 	// Deferred (Deferred)
 	{
 		ShaderInfo info =
@@ -467,6 +517,22 @@ void Resources::CreateDefaultShader()
 		shared_ptr<Shader> shader = make_shared<Shader>();
 		shader->CreateGraphicsShader(L"..\\Resources\\Shader\\lighting.fx", info, arg);
 		Add<Shader>(L"Final", shader);
+	}
+
+	// Line
+	{
+		ShaderInfo info =
+		{
+			SHADER_TYPE::FORWARD,
+			RASTERIZER_TYPE::CULL_NONE,
+			DEPTH_STENCIL_TYPE::LESS,
+			BLEND_TYPE::DEFAULT,
+			D3D_PRIMITIVE_TOPOLOGY_LINESTRIP
+		};
+
+		shared_ptr<Shader> shader = make_shared<Shader>();
+		shader->CreateGraphicsShader(L"..\\Resources\\Shader\\default.fx", info);
+		Add<Shader>(L"Line", shader);
 	}
 
 	//// Compute Shader
@@ -600,19 +666,19 @@ void Resources::CreateDefaultMaterial()
 		Add<Material>(L"DirLight", material);
 	}
 
-	//// PointLight
-	//{
-	//	const WindowInfo& window = GEngine->GetWindow();
-	//	Vec2 resolution = { static_cast<float>(window.width), static_cast<float>(window.height) };
+	// PointLight
+	{
+		const WindowInfo& window = GEngine->GetWindow();
+		Vec2 resolution = { static_cast<float>(window.width), static_cast<float>(window.height) };
 
-	//	shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"PointLight");
-	//	shared_ptr<Material> material = make_shared<Material>();
-	//	material->SetShader(shader);
-	//	material->SetTexture(0, GET_SINGLE(Resources)->Get<Texture>(L"PositionTarget"));
-	//	material->SetTexture(1, GET_SINGLE(Resources)->Get<Texture>(L"NormalTarget"));
-	//	material->SetVec2(0, resolution);
-	//	Add<Material>(L"PointLight", material);
-	//}
+		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"PointLight");
+		shared_ptr<Material> material = make_shared<Material>();
+		material->SetShader(shader);
+		material->SetTexture(0, GET_SINGLE(Resources)->Get<Texture>(L"PositionTarget"));
+		material->SetTexture(1, GET_SINGLE(Resources)->Get<Texture>(L"NormalTarget"));
+		material->SetVec2(0, resolution);
+		Add<Material>(L"PointLight", material);
+	}
 
 	// Final
 	{
@@ -623,6 +689,14 @@ void Resources::CreateDefaultMaterial()
 		material->SetTexture(1, GET_SINGLE(Resources)->Get<Texture>(L"DiffuseLightTarget"));
 		material->SetTexture(2, GET_SINGLE(Resources)->Get<Texture>(L"SpecularLightTarget"));
 		Add<Material>(L"Final", material);
+	}
+
+	// Circle
+	{
+		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Line");
+		shared_ptr<Material> material = make_shared<Material>();
+		material->SetShader(shader);
+		Add<Material>(L"Circle", material);
 	}
 
 	//// Compute Shader
@@ -646,7 +720,6 @@ void Resources::CreateDefaultMaterial()
 	//	shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"ComputeParticle");
 	//	shared_ptr<Material> material = make_shared<Material>();
 	//	material->SetShader(shader);
-
 	//	Add<Material>(L"ComputeParticle", material);
 	//}
 
@@ -693,7 +766,6 @@ void Resources::CreateDefaultMaterial()
 	//	shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"ComputeAnimation");
 	//	shared_ptr<Material> material = make_shared<Material>();
 	//	material->SetShader(shader);
-
 	//	Add<Material>(L"ComputeAnimation", material);
 	//}
 }
@@ -702,7 +774,7 @@ void Resources::CreatePlanetMaterial()
 {
 	// Sun
 	{
-		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Deferred");
+		shared_ptr<Shader> shader = GET_SINGLE(Resources)->Get<Shader>(L"Default");
 		shared_ptr<Texture> texture = GET_SINGLE(Resources)->Load<Texture>(L"Sun", L"..\\Resources\\Texture\\Planet\\Sun.jpg");
 		shared_ptr<Material> material = make_shared<Material>();
 		material->SetShader(shader);

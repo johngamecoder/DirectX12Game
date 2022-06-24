@@ -17,7 +17,7 @@ MeshRenderer::~MeshRenderer()
 
 }
 
-void MeshRenderer::SetMeshAndMaterial(MeshType type, const wstring& matName)
+void MeshRenderer::SetMeshAndMaterial(MeshType type, const wstring& matName, bool bCloneMaterial/* = false*/)
 {
 	if (matName.empty())
 	{
@@ -38,10 +38,23 @@ void MeshRenderer::SetMeshAndMaterial(MeshType type, const wstring& matName)
 
 			break;
 		}
+		case MeshType::CIRCLE:
+		{
+			shared_ptr<Mesh> circleMesh = GET_SINGLE(Resources)->LoadCircleMesh();
+			SetMesh(circleMesh);
+			break;
+		}
 	}
 
 	shared_ptr<Material> material = GET_SINGLE(Resources)->Get<Material>(matName);
-	SetMaterial(material);
+	if (bCloneMaterial)
+	{
+		SetMaterial(material->Clone());
+	}
+	else
+	{
+		SetMaterial(material);
+	}
 }
 
 void MeshRenderer::SetMaterial(shared_ptr<Material> material, uint32 idx)

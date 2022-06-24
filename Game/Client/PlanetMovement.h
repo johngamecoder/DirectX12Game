@@ -6,15 +6,13 @@ public:
 	PlanetMovement();
 	virtual ~PlanetMovement();
 	
-	void SetPlanetRotationAndOrbit(float planetRotation, float planetOrbit);
+	void SetPlanetOrbit(float planetOrbit);
 
 	virtual void Update() override;
 
 private:
-	shared_ptr<Transform> _orbitalTransform;
+	shared_ptr<Transform> _movementTransform;
 
-	float _planetRotation = 0.f; //자전
 	float _planetOrbit = 0.f; //공전
-
 	float _currentOrbit = 0.f;
 };

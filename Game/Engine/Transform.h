@@ -42,6 +42,9 @@ public:
 	void SetParent(shared_ptr<Transform> parent) { _parent = parent; }
 	weak_ptr<Transform> GetParent() { return _parent; }
 
+	void SetAdditionalTransform(shared_ptr<Transform> movementTransform) { _additionalTransform = movementTransform; }
+	weak_ptr<Transform> GetAdditionalTransform() { return _additionalTransform; }
+
 private:
 	// Parent ±‚¡ÿ
 	Vec3 _localPosition = {};
@@ -52,5 +55,6 @@ private:
 	Matrix _matWorld = {};
 
 	weak_ptr<Transform> _parent;
+	weak_ptr<Transform> _additionalTransform;
 };
 

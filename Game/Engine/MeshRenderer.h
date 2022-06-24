@@ -19,6 +19,7 @@ enum class MeshType : uint8
 {
 	SPHERE,
 	BOX,
+	CIRCLE,
 };
 
 class MeshRenderer : public Component
@@ -30,7 +31,7 @@ public:
 	shared_ptr<Mesh> GetMesh() { return _mesh; }
 	shared_ptr<Material> GetMaterial(uint32 idx = 0) { return _materials[idx]; }
 
-	void SetMeshAndMaterial(MeshType type, const wstring& matName);
+	void SetMeshAndMaterial(MeshType type, const wstring& matName, bool bCloneMaterial = false);
 
 	void SetMesh(shared_ptr<Mesh> mesh) { _mesh = mesh; }
 	void SetMaterial(shared_ptr<Material> material, uint32 idx = 0);

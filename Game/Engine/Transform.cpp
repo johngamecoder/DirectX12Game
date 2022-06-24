@@ -24,11 +24,16 @@ void Transform::FinalUpdate()
 	_matLocal = matScale * matRotation * matTranslation;
 	_matWorld = _matLocal;
 
+	shared_ptr<Transform> additionalTransform = GetAdditionalTransform().lock();
+	if (additionalTransform != nullptr)
+	{
+		_matWorld *= additionalTransform->GetNoScaleLocalToWorldMatrix();
+	}
+
 	shared_ptr<Transform> parent = GetParent().lock();
 	if (parent != nullptr)
 	{
-		const Matrix& parentMat = parent->GetNoScaleLocalToWorldMatrix();
-		_matWorld *= parentMat;
+		_matWorld *= parent->GetNoScaleLocalToWorldMatrix();
 	}
 }
 
